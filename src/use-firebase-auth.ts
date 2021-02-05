@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import firebaseConfig from "./firebase-config";
 
 export type UseFirebaseAuth = {
   loading: boolean;
@@ -64,6 +65,11 @@ async function verifyCode({
 }
 
 export function useFirebaseAuth(): UseFirebaseAuth {
+  useEffect(() => {
+    firebaseConfig.languageCode &&
+      (firebase.auth().languageCode = firebaseConfig.languageCode);
+  }, []);
+
   const [state, setState] = useState({
     loading: false,
     token: undefined as string | undefined,

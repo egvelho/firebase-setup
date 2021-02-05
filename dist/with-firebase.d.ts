@@ -1,7 +1,5 @@
 interface Options {
     analytics: boolean;
-    notifications: boolean;
-    auth: boolean;
 }
-export declare function WithFirebase({ analytics, notifications, auth, }?: Partial<Options>): null;
+export declare function WithFirebase({ analytics }?: Partial<Options>): null;
 export {};

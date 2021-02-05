@@ -4,6 +4,7 @@ exports.useFirebaseAuth = void 0;
 var tslib_1 = require("tslib");
 var app_1 = tslib_1.__importDefault(require("firebase/app"));
 var react_1 = require("react");
+var firebase_config_1 = tslib_1.__importDefault(require("./firebase-config"));
 function requestCode(phoneNumber, countryPrefix) {
     if (countryPrefix === void 0) { countryPrefix = "+55"; }
     return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -78,6 +79,10 @@ function verifyCode(_a) {
     });
 }
 function useFirebaseAuth() {
+    react_1.useEffect(function () {
+        firebase_config_1.default.languageCode &&
+            (app_1.default.auth().languageCode = firebase_config_1.default.languageCode);
+    }, []);
     var _a = tslib_1.__read(react_1.useState({
         loading: false,
         token: undefined,
