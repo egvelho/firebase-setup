@@ -49,21 +49,17 @@ function startNotifications(_a) {
                             }
                         });
                     }); });
-                    messagingInstance.onMessage(onMessage);
+                    onMessage && messagingInstance.onMessage(onMessage);
                     return [2 /*return*/];
             }
         });
     });
 }
 function WithNotifications(props) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
-            react_1.useEffect(function () {
-                startNotifications(props);
-            }, []);
-            return [2 /*return*/, null];
-        });
-    });
+    react_1.useEffect(function () {
+        startNotifications(props);
+    }, []);
+    return null;
 }
 exports.WithNotifications = WithNotifications;
 //# sourceMappingURL=with-notifications.js.map
