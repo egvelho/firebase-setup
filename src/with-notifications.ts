@@ -13,7 +13,7 @@ export interface Message {
 }
 
 interface Props {
-  onMessage: (message: Message) => Promise<void>;
+  onMessage?: (message: Message) => Promise<void>;
   onTokenRefresh?: (token: string) => Promise<void>;
   beforeRequestPermission?: () => Promise<void>;
 }
@@ -44,10 +44,10 @@ async function startNotifications({
     onTokenRefresh && onTokenRefresh(token);
   });
 
-  messagingInstance.onMessage(onMessage);
+  onMessage && messagingInstance.onMessage(onMessage);
 }
 
-export async function WithNotifications(props: Props) {
+export function WithNotifications(props: Props) {
   useEffect(() => {
     startNotifications(props);
   }, []);
