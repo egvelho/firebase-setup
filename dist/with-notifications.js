@@ -9,29 +9,34 @@ function startNotifications(_a) {
     var _b;
     var onMessage = _a.onMessage, onTokenRefresh = _a.onTokenRefresh, beforeRequestPermission = _a.beforeRequestPermission;
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var messagingInstance, permission, token;
+        var messagingInstance, _c, permission, token;
         var _this = this;
-        return tslib_1.__generator(this, function (_c) {
-            switch (_c.label) {
+        return tslib_1.__generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
                     messagingInstance = app_1.default.messaging();
                     messagingInstance.usePublicVapidKey((_b = firebase_config_1.default.publicVapidKey) !== null && _b !== void 0 ? _b : "");
                     if (!("Notification" in window)) {
                         return [2 /*return*/];
                     }
+                    _c = beforeRequestPermission;
+                    if (!_c) return [3 /*break*/, 2];
                     return [4 /*yield*/, beforeRequestPermission()];
                 case 1:
-                    _c.sent();
-                    return [4 /*yield*/, Notification.requestPermission()];
+                    _c = (_d.sent());
+                    _d.label = 2;
                 case 2:
-                    permission = _c.sent();
-                    if (!(permission === "granted")) return [3 /*break*/, 4];
-                    return [4 /*yield*/, messagingInstance.getToken()];
+                    _c;
+                    return [4 /*yield*/, Notification.requestPermission()];
                 case 3:
-                    token = _c.sent();
-                    onTokenRefresh(token);
-                    _c.label = 4;
+                    permission = _d.sent();
+                    if (!(permission === "granted")) return [3 /*break*/, 5];
+                    return [4 /*yield*/, messagingInstance.getToken()];
                 case 4:
+                    token = _d.sent();
+                    onTokenRefresh && onTokenRefresh(token);
+                    _d.label = 5;
+                case 5:
                     messagingInstance.onTokenRefresh(function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                         var token;
                         return tslib_1.__generator(this, function (_a) {
@@ -39,7 +44,7 @@ function startNotifications(_a) {
                                 case 0: return [4 /*yield*/, messagingInstance.getToken()];
                                 case 1:
                                     token = _a.sent();
-                                    onTokenRefresh(token);
+                                    onTokenRefresh && onTokenRefresh(token);
                                     return [2 /*return*/];
                             }
                         });

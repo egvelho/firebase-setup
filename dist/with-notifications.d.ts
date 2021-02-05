@@ -9,8 +9,8 @@ export interface Message {
 }
 interface Props {
     onMessage: (message: Message) => Promise<void>;
-    onTokenRefresh: (token: string) => Promise<void>;
-    beforeRequestPermission: () => Promise<void>;
+    onTokenRefresh?: (token: string) => Promise<void>;
+    beforeRequestPermission?: () => Promise<void>;
 }
 export declare function WithNotifications(props: Props): Promise<null>;
 export {};
