@@ -1,0 +1,32 @@
+{
+  "name": "firebase-setup",
+  "version": "1.0.0",
+  "description": "Easy setup for Firebase.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "load-firebase": "node load-firebase.js"
+  },
+  "bin": {
+    "setup-firebase": "./setup-firebase.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egvelho/html-metadata.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egvelho/html-metadata/issues"
+  },
+  "homepage": "https://github.com/egvelho/html-metadata#readme",
+  "dependencies": {
+    "firebase": "^8.2.6",
+    "react": "^17.0.1",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.1",
+    "typescript": "^4.1.3"
+  }
+}
