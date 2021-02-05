@@ -14,8 +14,8 @@ export interface Message {
 
 interface Props {
   onMessage: (message: Message) => Promise<void>;
-  onTokenRefresh: (token: string) => Promise<void>;
-  beforeRequestPermission: () => Promise<void>;
+  onTokenRefresh?: (token: string) => Promise<void>;
+  beforeRequestPermission?: () => Promise<void>;
 }
 
 async function startNotifications({
@@ -31,17 +31,17 @@ async function startNotifications({
     return;
   }
 
-  await beforeRequestPermission();
+  beforeRequestPermission && (await beforeRequestPermission());
   const permission = await Notification.requestPermission();
 
   if (permission === "granted") {
     const token = await messagingInstance.getToken();
-    onTokenRefresh(token);
+    onTokenRefresh && onTokenRefresh(token);
   }
 
   messagingInstance.onTokenRefresh(async () => {
     const token = await messagingInstance.getToken();
-    onTokenRefresh(token);
+    onTokenRefresh && onTokenRefresh(token);
   });
 
   messagingInstance.onMessage(onMessage);

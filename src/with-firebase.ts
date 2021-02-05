@@ -3,39 +3,39 @@ import firebase from "firebase/app";
 import firebaseConfig from "./firebase-config";
 
 interface Options {
-  withAnalytics: boolean;
-  withNotifications: boolean;
-  withAuth: boolean;
+  analytics: boolean;
+  notifications: boolean;
+  auth: boolean;
 }
 
 async function initializeApp({
-  withAnalytics = false,
-  withNotifications = false,
-  withAuth = false,
+  analytics = false,
+  notifications = false,
+  auth = false,
 }: Options) {
   if (firebase.apps.length) {
     return;
   }
 
-  withNotifications && (await import("firebase/messaging"));
-  withAnalytics && (await import("firebase/analytics"));
-  withAuth && (await import("firebase/auth"));
+  notifications && (await import("firebase/messaging"));
+  analytics && (await import("firebase/analytics"));
+  auth && (await import("firebase/auth"));
 
   firebase.initializeApp(firebaseConfig);
 
-  withAnalytics && firebase.analytics();
-  withAuth &&
+  analytics && firebase.analytics();
+  auth &&
     firebaseConfig.languageCode &&
     (firebase.auth().languageCode = firebaseConfig.languageCode);
 }
 
 export function WithFirebase({
-  withAnalytics = false,
-  withNotifications = false,
-  withAuth = false,
-}: Options) {
+  analytics = false,
+  notifications = false,
+  auth = false,
+}: Partial<Options> = {}) {
   useEffect(() => {
-    initializeApp({ withAnalytics, withNotifications, withAuth });
+    initializeApp({ analytics, notifications, auth });
   }, []);
   return null;
 }
