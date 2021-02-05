@@ -16,6 +16,7 @@ async function initializeApp({ analytics = false }: Options) {
   }
 
   firebase.initializeApp(firebaseConfig);
+  analytics && firebase.analytics();
 }
 
 export function WithFirebase({ analytics = false }: Partial<Options> = {}) {

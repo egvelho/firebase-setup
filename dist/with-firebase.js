@@ -16,6 +16,7 @@ function initializeApp(_a) {
                 return [2 /*return*/];
             }
             app_1.default.initializeApp(firebase_config_1.default);
+            analytics && app_1.default.analytics();
             return [2 /*return*/];
         });
     });
