@@ -9,45 +9,35 @@ Promise.resolve().then(function () { return tslib_1.__importStar(require("fireba
 Promise.resolve().then(function () { return tslib_1.__importStar(require("firebase/analytics")); });
 Promise.resolve().then(function () { return tslib_1.__importStar(require("firebase/auth")); });
 function initializeApp(_a) {
-    var _b;
     var analytics = _a.analytics, onAuthIdTokenChange = _a.onAuthIdTokenChange;
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var _c;
         var _this = this;
-        return tslib_1.__generator(this, function (_d) {
-            switch (_d.label) {
-                case 0:
-                    if (app_1.default.apps.length) {
-                        return [2 /*return*/];
-                    }
-                    app_1.default.initializeApp(firebase_config_1.default);
-                    analytics && app_1.default.analytics();
-                    if (!onAuthIdTokenChange) return [3 /*break*/, 2];
-                    _c = onAuthIdTokenChange;
-                    return [4 /*yield*/, ((_b = app_1.default.auth().currentUser) === null || _b === void 0 ? void 0 : _b.getIdToken())];
-                case 1:
-                    _c.apply(void 0, [_d.sent()]);
-                    app_1.default.auth().onIdTokenChanged(function (user) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-                        var _a;
-                        return tslib_1.__generator(this, function (_b) {
-                            switch (_b.label) {
-                                case 0:
-                                    if (!user) return [3 /*break*/, 2];
-                                    _a = onAuthIdTokenChange;
-                                    return [4 /*yield*/, user.getIdToken()];
-                                case 1:
-                                    _a.apply(void 0, [_b.sent()]);
-                                    return [3 /*break*/, 3];
-                                case 2:
-                                    onAuthIdTokenChange(undefined);
-                                    _b.label = 3;
-                                case 3: return [2 /*return*/];
-                            }
-                        });
-                    }); });
-                    _d.label = 2;
-                case 2: return [2 /*return*/];
+        return tslib_1.__generator(this, function (_b) {
+            if (app_1.default.apps.length) {
+                return [2 /*return*/];
             }
+            app_1.default.initializeApp(firebase_config_1.default);
+            analytics && app_1.default.analytics();
+            onAuthIdTokenChange &&
+                app_1.default.auth().onIdTokenChanged(function (user) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                    var _a;
+                    return tslib_1.__generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                if (!user) return [3 /*break*/, 2];
+                                _a = onAuthIdTokenChange;
+                                return [4 /*yield*/, user.getIdToken()];
+                            case 1:
+                                _a.apply(void 0, [_b.sent()]);
+                                return [3 /*break*/, 3];
+                            case 2:
+                                onAuthIdTokenChange(undefined);
+                                _b.label = 3;
+                            case 3: return [2 /*return*/];
+                        }
+                    });
+                }); });
+            return [2 /*return*/];
         });
     });
 }

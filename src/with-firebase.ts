@@ -18,8 +18,7 @@ async function initializeApp({ analytics, onAuthIdTokenChange }: Options) {
 
   firebase.initializeApp(firebaseConfig);
   analytics && firebase.analytics();
-  if (onAuthIdTokenChange) {
-    onAuthIdTokenChange(await firebase.auth().currentUser?.getIdToken());
+  onAuthIdTokenChange &&
     firebase.auth().onIdTokenChanged(async (user) => {
       if (user) {
         onAuthIdTokenChange(await user.getIdToken());
@@ -27,7 +26,6 @@ async function initializeApp({ analytics, onAuthIdTokenChange }: Options) {
         onAuthIdTokenChange(undefined);
       }
     });
-  }
 }
 
 export function WithFirebase({
