@@ -1,6 +1,7 @@
+import firebase from "firebase/app";
 interface Options {
     analytics: boolean;
-    onAuthIdTokenChange: (idToken: string | undefined) => void;
+    onUserLoaded: (user: firebase.User | undefined) => void;
 }
-export declare function WithFirebase({ analytics, onAuthIdTokenChange, }?: Partial<Options>): null;
+export declare function WithFirebase({ analytics, onUserLoaded, }?: Partial<Options>): null;
 export {};
