@@ -27,7 +27,7 @@ async function startNotifications({
 
   messagingInstance.usePublicVapidKey(firebaseConfig.publicVapidKey ?? "");
 
-  if (!("Notification" in window)) {
+  if (!("Notification" in window) || !firebase.messaging.isSupported()) {
     return;
   }
 
