@@ -85,7 +85,6 @@ function useFirebaseAuth() {
     }, []);
     var _a = tslib_1.__read(react_1.useState({
         loading: false,
-        token: undefined,
         confirmationResult: undefined,
     }), 2), state = _a[0], setState = _a[1];
     return {
@@ -124,7 +123,7 @@ function useFirebaseAuth() {
                             _b.label = 2;
                         case 2:
                             token = _a;
-                            setState(tslib_1.__assign(tslib_1.__assign({}, state), { token: token, loading: false }));
+                            setState(tslib_1.__assign(tslib_1.__assign({}, state), { loading: false }));
                             return [2 /*return*/, !!token];
                     }
                 });

@@ -8,20 +8,34 @@ import("firebase/auth");
 
 interface Options {
   analytics: boolean;
+  onAuthIdTokenChange: (idToken: string | undefined) => void;
 }
 
-async function initializeApp({ analytics = false }: Options) {
+async function initializeApp({ analytics, onAuthIdTokenChange }: Options) {
   if (firebase.apps.length) {
     return;
   }
 
   firebase.initializeApp(firebaseConfig);
   analytics && firebase.analytics();
+  if (onAuthIdTokenChange) {
+    onAuthIdTokenChange(await firebase.auth().currentUser?.getIdToken());
+    firebase.auth().onIdTokenChanged(async (user) => {
+      if (user) {
+        onAuthIdTokenChange(await user.getIdToken());
+      } else {
+        onAuthIdTokenChange(undefined);
+      }
+    });
+  }
 }
 
-export function WithFirebase({ analytics = false }: Partial<Options> = {}) {
+export function WithFirebase({
+  analytics = false,
+  onAuthIdTokenChange = (idToken: string | undefined) => {},
+}: Partial<Options> = {}) {
   useEffect(() => {
-    initializeApp({ analytics });
+    initializeApp({ analytics, onAuthIdTokenChange });
   }, []);
   return null;
 }

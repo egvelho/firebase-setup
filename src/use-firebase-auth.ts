@@ -72,7 +72,6 @@ export function useFirebaseAuth(): UseFirebaseAuth {
 
   const [state, setState] = useState({
     loading: false,
-    token: undefined as string | undefined,
     confirmationResult: undefined as
       | firebase.auth.ConfirmationResult
       | undefined,
@@ -111,7 +110,6 @@ export function useFirebaseAuth(): UseFirebaseAuth {
 
       setState({
         ...state,
-        token,
         loading: false,
       });
 
