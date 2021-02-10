@@ -23,13 +23,13 @@ async function startNotifications({
   onTokenRefresh,
   beforeRequestPermission,
 }: Props) {
-  const messagingInstance = firebase.messaging();
-
-  messagingInstance.usePublicVapidKey(firebaseConfig.publicVapidKey ?? "");
-
   if (!("Notification" in window) || !firebase.messaging.isSupported()) {
     return;
   }
+
+  const messagingInstance = firebase.messaging();
+
+  messagingInstance.usePublicVapidKey(firebaseConfig.publicVapidKey ?? "");
 
   beforeRequestPermission && (await beforeRequestPermission());
   const permission = await Notification.requestPermission();

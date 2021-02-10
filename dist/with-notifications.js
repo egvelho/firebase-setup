@@ -14,11 +14,11 @@ function startNotifications(_a) {
         return tslib_1.__generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
-                    messagingInstance = app_1.default.messaging();
-                    messagingInstance.usePublicVapidKey((_b = firebase_config_1.default.publicVapidKey) !== null && _b !== void 0 ? _b : "");
                     if (!("Notification" in window) || !app_1.default.messaging.isSupported()) {
                         return [2 /*return*/];
                     }
+                    messagingInstance = app_1.default.messaging();
+                    messagingInstance.usePublicVapidKey((_b = firebase_config_1.default.publicVapidKey) !== null && _b !== void 0 ? _b : "");
                     _c = beforeRequestPermission;
                     if (!_c) return [3 /*break*/, 2];
                     return [4 /*yield*/, beforeRequestPermission()];
