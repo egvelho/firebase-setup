@@ -1,5 +1,5 @@
 {
-  "name": "next-firebase",
+  "name": "@egvelho/next-firebase",
   "version": "1.0.0",
   "description": "Easy Firebase setup for Next.js.",
   "main": "dist/index.js",
