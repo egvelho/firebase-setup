@@ -1,3 +1,4 @@
 export { useFirebaseAuth } from "./use-firebase-auth";
-export { WithNotifications } from "./with-notifications";
+export { WithFirebaseNotifications } from "./with-firebase-notifications";
 export { WithFirebase } from "./with-firebase";
+export { loadFirebase } from "./load-firebase";

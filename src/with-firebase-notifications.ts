@@ -47,7 +47,7 @@ async function startNotifications({
   onMessage && messagingInstance.onMessage(onMessage);
 }
 
-export function WithNotifications(props: Props) {
+export function WithFirebaseNotifications(props: Props) {
   useEffect(() => {
     startNotifications(props);
   }, []);

@@ -1,15 +1,14 @@
-#!/usr/bin/env node
+export function loadFirebase({ outPath }: { outPath: string }) {
+  if (typeof window !== "undefined") {
+    return;
+  }
 
-require("dotenv").config();
+  eval('require("dotenv").config()');
+  const fs = eval('require("fs")');
+  const path = eval('require("path")');
+  const https = eval('require("https")');
+  const packageJson = eval('require("../package.json")');
 
-const fs = require("fs");
-const path = require("path");
-const https = require("https");
-const package = require("./package.json");
-
-const [outPath] = process.argv.slice(2);
-
-function loadFirebase() {
   const {
     NEXT_PUBLIC_FIREBASE_API_KEY,
     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -80,13 +79,13 @@ function loadFirebase() {
   };
 
   if (Object.values(firebaseConfig).every((entry) => entry)) {
-    console.log("Firebase data found in env");
+    console.log("\nLoading firebase assets...");
 
     const firebaseMessagingSw = `importScripts("/firebase-app.js");importScripts("/firebase-messaging.js");firebase.initializeApp(${JSON.stringify(
       firebaseConfig
     )});const messaging = firebase.messaging();`;
 
-    const firebaseVersion = package.dependencies.firebase
+    const firebaseVersion = packageJson.dependencies.firebase
       .replace("^", "")
       .replace("~", "");
 
@@ -97,34 +96,32 @@ function loadFirebase() {
       path.join(outPath, "firebase-app.js")
     );
 
-    console.log(`Using firebase version ${firebaseVersion}`);
-    console.log("Loading firebase-messaging.js...");
+    console.log(`\nUsing firebase version ${firebaseVersion}`);
+    console.log(`\nWriting to ${outPath}/firebase-messaging.js...`);
 
     https.get(
       `https://www.gstatic.com/firebasejs/${firebaseVersion}/firebase-messaging.js`,
-      (response) => {
+      (response: any) => {
         response.pipe(firebaseMessagingFile);
       }
     );
 
-    console.log("Loading firebase-app.js...");
+    console.log(`\Writing to ${outPath}/firebase-app.js...`);
 
     https.get(
       `https://www.gstatic.com/firebasejs/${firebaseVersion}/firebase-app.js`,
-      (response) => {
+      (response: any) => {
         response.pipe(firebaseAppFile);
       }
     );
 
-    console.log("Loading firebase-messaging-sw.js...");
+    console.log(`\nWriting to ${outPath}/firebase-messaging-sw.js...`);
 
     fs.writeFileSync(
       path.join(outPath, "firebase-messaging-sw.js"),
       firebaseMessagingSw
     );
-  } else {
-    console.error("ERROR: Firebase data not found in env.");
+
+    console.log("\nFirebase load success!");
   }
 }
-
-loadFirebase();

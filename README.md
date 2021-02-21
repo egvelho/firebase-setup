@@ -1,2 +1,3 @@
 # firebase-setup
-Easy setup for Firebase.
+
+Easy Firebase setup for Next.js.
