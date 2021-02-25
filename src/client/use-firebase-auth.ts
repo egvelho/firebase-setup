@@ -5,7 +5,7 @@ import firebaseConfig from "./firebase-config";
 export type UseFirebaseAuth = {
   loading: boolean;
   requestCode: (phoneNumber: string) => Promise<boolean>;
-  verifyCode: (code: string) => Promise<boolean>;
+  verifyCode: (code: string) => Promise<string | undefined>;
 };
 
 async function requestCode(phoneNumber: string, countryPrefix: string = "+55") {
@@ -113,7 +113,7 @@ export function useFirebaseAuth(): UseFirebaseAuth {
         loading: false,
       });
 
-      return !!token;
+      return token;
     },
   };
 }

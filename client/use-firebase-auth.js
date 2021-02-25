@@ -124,7 +124,7 @@ function useFirebaseAuth() {
                         case 2:
                             token = _a;
                             setState(tslib_1.__assign(tslib_1.__assign({}, state), { loading: false }));
-                            return [2 /*return*/, !!token];
+                            return [2 /*return*/, token];
                     }
                 });
             });
