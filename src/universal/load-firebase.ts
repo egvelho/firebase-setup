@@ -1,4 +1,6 @@
-export function loadFirebase({ outPath }: { outPath: string }) {
+export function loadFirebase({
+  outPath = "public",
+}: { outPath?: string } = {}) {
   if (typeof window !== "undefined") {
     return;
   }
@@ -79,7 +81,7 @@ export function loadFirebase({ outPath }: { outPath: string }) {
   };
 
   if (Object.values(firebaseConfig).every((entry) => entry)) {
-    console.log("\nLoading firebase assets...");
+    console.log("Loading firebase assets...");
 
     const firebaseMessagingSw = `importScripts("/firebase-app.js");importScripts("/firebase-messaging.js");firebase.initializeApp(${JSON.stringify(
       firebaseConfig
@@ -96,8 +98,8 @@ export function loadFirebase({ outPath }: { outPath: string }) {
       path.join(outPath, "firebase-app.js")
     );
 
-    console.log(`\nUsing firebase version ${firebaseVersion}`);
-    console.log(`\nWriting to ${outPath}/firebase-messaging.js...`);
+    console.log(`Using firebase version ${firebaseVersion}`);
+    console.log(`Writing to ${outPath}/firebase-messaging.js...`);
 
     https.get(
       `https://www.gstatic.com/firebasejs/${firebaseVersion}/firebase-messaging.js`,
@@ -106,7 +108,7 @@ export function loadFirebase({ outPath }: { outPath: string }) {
       }
     );
 
-    console.log(`\Writing to ${outPath}/firebase-app.js...`);
+    console.log(`Writing to ${outPath}/firebase-app.js...`);
 
     https.get(
       `https://www.gstatic.com/firebasejs/${firebaseVersion}/firebase-app.js`,
@@ -115,13 +117,13 @@ export function loadFirebase({ outPath }: { outPath: string }) {
       }
     );
 
-    console.log(`\nWriting to ${outPath}/firebase-messaging-sw.js...`);
+    console.log(`Writing to ${outPath}/firebase-messaging-sw.js...`);
 
     fs.writeFileSync(
       path.join(outPath, "firebase-messaging-sw.js"),
       firebaseMessagingSw
     );
 
-    console.log("\nFirebase load success!");
+    console.log("Firebase load success!");
   }
 }

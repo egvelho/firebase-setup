@@ -1,3 +1,3 @@
-export declare function loadFirebase({ outPath }: {
-    outPath: string;
+export declare function loadFirebase({ outPath, }?: {
+    outPath?: string;
 }): void;
