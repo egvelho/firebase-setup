@@ -9,7 +9,7 @@ export function loadFirebase({
   const fs = eval('require("fs")');
   const path = eval('require("path")');
   const https = eval('require("https")');
-  const packageJson = JSON.parse(fs.readFileSync("package.json"));
+  const packageJson = eval('require("./package.json")');
 
   const {
     NEXT_PUBLIC_FIREBASE_API_KEY,
