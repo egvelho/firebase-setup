@@ -17,7 +17,7 @@ async function initializeApp({ analytics, onUserLoaded }: Options) {
   }
 
   firebase.initializeApp(firebaseConfig);
-  analytics && firebase.analytics();
+  analytics && firebase.analytics.isSupported() && firebase.analytics();
   onUserLoaded &&
     firebase.auth().onIdTokenChanged(async (user) => {
       if (user) {

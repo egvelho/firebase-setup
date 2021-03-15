@@ -1,1 +1,1 @@
-export default {};
+export { loadFirebase } from "./load-firebase";
